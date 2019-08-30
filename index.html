@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React GO </title>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            font-size: 16px;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .App {
+            font-family: sans-serif;
+            font-size: 1rem;
+        }
+
+        .TimeboxEditor {
+            text-align: right;
+            border: 1px solid grey;
+            border-radius: 5px;
+            padding: 2rem;
+            margin: 1rem;
+        }
+
+        input {
+            max-width: 60%;
+            font-size: 1rem;
+            margin: 1rem 4rem 0 4rem;
+            background: limegreen;
+            padding: .5rem;
+        }
+
+        .TimeBox {
+            border: 1px solid grey;
+            margin: 1rem;
+            padding: 2rem;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .clock {
+            color: coral;
+        }
+
+        .progressBar {
+            border: 1px solid grey;
+            border-radius: 5px;
+            height: 2rem;
+            margin: 3rem;
+            padding: .5rem;
+        }
+
+        .progressBar>div {
+            height: 100%;
+            background: linear-gradient(to right, #ccc, #444);
+
+        }
+
+        .inactive {
+            filter: blur(2px) grayscale(1);
+        }
+    </style>
+</head>
+
+<body>
+    <h1> Kurs React </h1>
+    <hr>
+    <hr>
+    <hr>
+
+    <div id="root"></div>
+    <script type="text/babel">
+
+        function Time () {
+            const timer = new Date();
+            const days = timer.getDays() < 10? "0" + timer.getDays() : timer.getDays();
+            const hours = timer.getHours() < 10? "0" + timer.getHours() : timer.getHours();
+            const minutes = timer.getMinutes() < 10? "0" + timer.getMinutes() : timer.getMinutes();
+            const seconds = timer.getSeconds() < 10? "0" + timer.getSeconds() : timer.getSeconds();
+        }
+
+        let days = 7;
+        let hours = 3;
+        let minutes = 10;
+        let miliseconds = 666;
+
+        function TimeboxEditor () {
+            return (
+                <div className="TimeboxEditor inactive">
+                    <label> co robisz ?? <input disabled value="Ucze sie" type="text"/></label><br/>
+                    <label> Ile minut ? <input disabled value="666" type="number"/></label><br/>
+                    <button>Zacznij</button>
+                </div>);
+        }
+
+        function Clock({props}) {
+        return <h2 className = "clock"> Pozostalo {days < 10? "0" + days : days}:{hours < 10? "0" + hours : hours}:{minutes < 10? "0" + minutes : minutes}.{miliseconds < 10? "0" + miliseconds : miliseconds} </h2>
+    }
+
+        function ProgressBar({percent = 33}){
+            return (<div className="progressBar">
+                        <div style={{width:`${percent}%`}}></div>
+                    </div>);
+        }
+
+        function Timebox () {
+            return (
+                <div className="TimeBox">
+                    <h1>Ucze sie reacta</h1>
+                    <Clock />
+                    <ProgressBar />
+                    <button disabled>Start</button>
+                    <button>Stop</button>
+                    <button>Pauza</button> <br />
+                    Liczba przerw 2
+                </div>
+            )
+        }
+
+        function App () {
+            return (
+                <div className="App">
+                    <Timebox />
+                    <TimeboxEditor />
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, document.getElementById("root"));
+
+    </script>
+</body>
+
+</html>
