@@ -114,18 +114,46 @@
                     </div>);
         }
 
-        function Timebox () {
-            return (
-                <div className="TimeBox">
-                    <h1>Ucze sie reacta</h1>
-                    <Clock />
-                    <ProgressBar />
-                    <button disabled>Start</button>
-                    <button>Stop</button>
-                    <button>Pauza</button> <br />
-                    Liczba przerw 2
-                </div>
-            )
+        class Timebox extends React.Component {
+
+            constructor (props) {
+                super (props);
+                this.state = {
+                    isRunning: false,
+                    isPaused: false,
+                    pausesCount: 0
+                }
+            }
+
+            handleStart(event) {
+                this.setState({
+                    isRunning: true
+                    
+                })
+            }
+
+            handleStop(event) {
+                this.setState({
+                    isRunning: false,
+                    isPaused: false,
+                    pausesCount: 0
+                });
+            }
+
+            render () {
+                const {isPaused, isRunning, pausesCount} = this.state;
+                return (
+                    <div className="TimeBox">
+                        <h1>Ucze sie reacta</h1>
+                        <Clock />
+                        <ProgressBar />
+                        <button onClick={this.handleStart.bind(this)} disabled = {isRunning}>Start</button>
+                        <button onClick={this.handleStop.bind(this)} disabled = {isPaused}>Stop</button>
+                        <button disabled = {!isPaused}>{isPaused? "Wznow" : "Pauzuj"}</button> <br />
+                        Liczba przerw 2
+                    </div>
+                )
+            }
         }
 
         function App () {
