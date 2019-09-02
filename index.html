@@ -176,7 +176,7 @@
 
             render () {
                 const {isPaused, isRunning, pausesCount, elapsedTimesInSeconds} = this.state;
-                const totalTimeInSeconds = 5*60;
+                const totalTimeInSeconds = 59*60;
                 const timeLeftInSeconds = totalTimeInSeconds - elapsedTimesInSeconds;
                 const minutesLeft = Math.floor(timeLeftInSeconds/60);
                 const secondsLeft = Math.floor(timeLeftInSeconds%60);
