@@ -100,7 +100,7 @@
         }
 
         function Clock({className = "", minutes, seconds}) {
-        return <h2 className = {"clock " + className}> Pozostalo: {minutes <10 ? "0" + minutes :minutes } : {seconds < 10 ? "0" + seconds : seconds} </h2>
+        return <h2 className = {"clock " + className}> Time to left: {minutes <10 ? "0" + minutes :minutes } : {seconds < 10 ? "0" + seconds : seconds} </h2>
     }
 
         function ProgressBar({className = "", percent = 33}){
@@ -183,14 +183,14 @@
                 const progressInPercent = (elapsedTimesInSeconds/totalTimeInSeconds) * 100.0;
                 return (
                     <div className="TimeBox">
-                        <h1> Lest Go </h1>
+                        <h1> Let's Go </h1>
                         <Clock minutes={minutesLeft} seconds={secondsLeft} className={isPaused ? "inactive" : ""}/>
                         <ProgressBar percent={progressInPercent} className={isPaused ? "inactive" : ""}/>
                         <button onClick={this.handleStart} disabled = {isRunning}>Start</button>
                         <button onClick={this.handleStop} disabled = {!isRunning}>Stop</button>
-                        <button onClick={this.togglePause} disabled = {!isRunning}>{isPaused ? "Wznow" : "Pauzuj"}</button> <br/>
+                        <button onClick={this.togglePause} disabled = {!isRunning}>{isPaused ? "Continue" : "Pause"}</button> <br/>
                         <br/>
-                        Liczba przerw  {pausesCount}
+                        Breaks  {pausesCount}
                     </div>
                 )
             }
