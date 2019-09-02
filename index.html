@@ -20,6 +20,11 @@
             margin: 0;
         }
 
+        .text {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
         .App {
             font-family: sans-serif;
             font-size: 1rem;
@@ -74,21 +79,11 @@
 </head>
 
 <body>
-    <h1> Kurs React </h1>
-    <hr>
-    <hr>
+    <h1 class="text">Time to learn React. Once a day, every day</h1>
     <hr>
 
     <div id="root"></div>
     <script type="text/babel">
-
-        function Time () {
-            const timer = new Date();
-            const days = timer.getDays() < 10? "0" + timer.getDays() : timer.getDays();
-            const hours = timer.getHours() < 10? "0" + timer.getHours() : timer.getHours();
-            const minutes = timer.getMinutes() < 10? "0" + timer.getMinutes() : timer.getMinutes();
-            const seconds = timer.getSeconds() < 10? "0" + timer.getSeconds() : timer.getSeconds();
-        }
 
         let days = 7;
         let hours = 3;
@@ -104,53 +99,98 @@
                 </div>);
         }
 
-        function Clock({props}) {
-        return <h2 className = "clock"> Pozostalo {days < 10? "0" + days : days}:{hours < 10? "0" + hours : hours}:{minutes < 10? "0" + minutes : minutes}.{miliseconds < 10? "0" + miliseconds : miliseconds} </h2>
+        function Clock({className = "", minutes, seconds}) {
+        return <h2 className = {"clock " + className}> Pozostalo: {minutes <10 ? "0" + minutes :minutes } : {seconds < 10 ? "0" + seconds : seconds} </h2>
     }
 
-        function ProgressBar({percent = 33}){
-            return (<div className="progressBar">
+        function ProgressBar({className = "", percent = 33}){
+            return (<div className={"progressBar " + className}>
                         <div style={{width:`${percent}%`}}></div>
                     </div>);
         }
 
         class Timebox extends React.Component {
-
             constructor (props) {
                 super (props);
                 this.state = {
                     isRunning: false,
                     isPaused: false,
-                    pausesCount: 0
+                    pausesCount: 0,
+                    elapsedTimesInSeconds: 0
                 }
+                this.handleStart = this.handleStart.bind(this)
+                this.handleStop = this.handleStop.bind(this)
+                this.togglePause = this.togglePause.bind(this)
             }
 
             handleStart(event) {
                 this.setState({
-                    isRunning: true
-                    
+                    isRunning: true,
                 })
+                this.startTimer();
             }
 
             handleStop(event) {
                 this.setState({
                     isRunning: false,
                     isPaused: false,
-                    pausesCount: 0
-                });
+                    pausesCount: 0,
+                    elapsedTimesInSeconds: 0
+                })
+                this.stopTimer();
+            }
+
+            startTimer () {
+                this.intervalId = window.setInterval(
+                    () => {
+                        this.setState(
+                            (prevState) => ({elapsedTimesInSeconds: prevState.elapsedTimesInSeconds + 0.1})
+                        )    
+                    }, 
+                    100
+                )
+            }
+
+            stopTimer() {
+                window.clearInterval(this.intervalId)
+            }
+
+            togglePause () {
+                this.setState(
+                    function (prevState){
+                        const isPaused = !prevState.isPaused;
+                        console.log(isPaused);
+                        if (isPaused){
+                            this.stopTimer();
+                        }
+                        else {
+                            this.startTimer();
+                        }
+                        return{
+                            isPaused,
+                            pausesCount: isPaused ? prevState.pausesCount + 1 : prevState.pausesCount
+                        }
+                    }
+                )
             }
 
             render () {
-                const {isPaused, isRunning, pausesCount} = this.state;
+                const {isPaused, isRunning, pausesCount, elapsedTimesInSeconds} = this.state;
+                const totalTimeInSeconds = 5*60;
+                const timeLeftInSeconds = totalTimeInSeconds - elapsedTimesInSeconds;
+                const minutesLeft = Math.floor(timeLeftInSeconds/60);
+                const secondsLeft = Math.floor(timeLeftInSeconds%60);
+                const progressInPercent = (elapsedTimesInSeconds/totalTimeInSeconds) * 100.0;
                 return (
                     <div className="TimeBox">
-                        <h1>Ucze sie reacta</h1>
-                        <Clock />
-                        <ProgressBar />
-                        <button onClick={this.handleStart.bind(this)} disabled = {isRunning}>Start</button>
-                        <button onClick={this.handleStop.bind(this)} disabled = {isPaused}>Stop</button>
-                        <button disabled = {!isPaused}>{isPaused? "Wznow" : "Pauzuj"}</button> <br />
-                        Liczba przerw 2
+                        <h1> Lest Go </h1>
+                        <Clock minutes={minutesLeft} seconds={secondsLeft} className={isPaused ? "inactive" : ""}/>
+                        <ProgressBar percent={progressInPercent} className={isPaused ? "inactive" : ""}/>
+                        <button onClick={this.handleStart} disabled = {isRunning}>Start</button>
+                        <button onClick={this.handleStop} disabled = {!isRunning}>Stop</button>
+                        <button onClick={this.togglePause} disabled = {!isRunning}>{isPaused ? "Wznow" : "Pauzuj"}</button> <br/>
+                        <br/>
+                        Liczba przerw  {pausesCount}
                     </div>
                 )
             }
@@ -164,8 +204,7 @@
                 </div>
             )
         }
-
-        ReactDOM.render(<App />, document.getElementById("root"));
+        ReactDOM.render(<App/>, document.getElementById("root"));
 
     </script>
 </body>
