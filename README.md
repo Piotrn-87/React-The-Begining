@@ -1,6 +1,5 @@
 # React-The-Begining
 
-
 ![Homepage screenshot](img/readme.gif)
 
 # TechnologiesI've used
