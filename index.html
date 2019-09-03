@@ -9,7 +9,6 @@
 
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
@@ -75,20 +74,19 @@
         .inactive {
             filter: blur(2px) grayscale(1);
         }
+
+        #root {
+            background: lightgrey;
+        }
     </style>
 </head>
 
 <body>
     <h1 class="text">Time to learn React. Once a day, every day</h1>
     <hr>
-
     <div id="root"></div>
-    <script type="text/babel">
 
-        let days = 7;
-        let hours = 3;
-        let minutes = 10;
-        let miliseconds = 666;
+    <script type="text/babel">
 
         function TimeboxEditor () {
             return (
@@ -100,10 +98,10 @@
         }
 
         function Clock({className = "", minutes, seconds}) {
-        return <h2 className = {"clock " + className}> Time to left: {minutes <10 ? "0" + minutes :minutes } : {seconds < 10 ? "0" + seconds : seconds} </h2>
+        return <h2 className = {"clock " + className}> Time to left: {minutes <10 ? "0" + minutes : minutes} : {seconds < 10 ? "0" + seconds : seconds} </h2>
     }
 
-        function ProgressBar({className = "", percent = 33}){
+        function ProgressBar({className = "", percent}){
             return (<div className={"progressBar " + className}>
                         <div style={{width:`${percent}%`}}></div>
                     </div>);
@@ -183,14 +181,14 @@
                 const progressInPercent = (elapsedTimesInSeconds/totalTimeInSeconds) * 100.0;
                 return (
                     <div className="TimeBox">
-                        <h1> Let's Go </h1>
+                        <h1 className="TimeBoxClock"> Let's Go </h1>
                         <Clock minutes={minutesLeft} seconds={secondsLeft} className={isPaused ? "inactive" : ""}/>
                         <ProgressBar percent={progressInPercent} className={isPaused ? "inactive" : ""}/>
                         <button onClick={this.handleStart} disabled = {isRunning}>Start</button>
                         <button onClick={this.handleStop} disabled = {!isRunning}>Stop</button>
-                        <button onClick={this.togglePause} disabled = {!isRunning}>{isPaused ? "Continue" : "Pause"}</button> <br/>
-                        <br/>
-                        Breaks  {pausesCount}
+                        <button onClick={this.togglePause} disabled = {!isRunning}>{isPaused ? "Continue" : "Pause"}</button> 
+                        <br/> <br/>
+                        Breaks {pausesCount}
                     </div>
                 )
             }
@@ -204,8 +202,30 @@
                 </div>
             )
         }
-        ReactDOM.render(<App/>, document.getElementById("root"));
 
+        // function App () {
+        //     return (
+        //         <div className="App">
+        //             <Timebox />
+        //             <TimeboxEditor />
+        //         </div>
+        //     )
+        // }
+       
+        // function tick () {
+        //     const element = (
+        //         <div>
+        //             <h1> Let's Go </h1>
+        //             <h2> {new Date().toLocaleTimeString()} </h2>
+        //         </div>
+        //     );
+        //     ReactDOM.render(element, document.querySelector(".TimeBoxClock"));
+        // }
+        // setInterval(tick, 1000);
+
+        const root = document.getElementById("root");
+        ReactDOM.render(<App/>, root)
+        
     </script>
 </body>
 
