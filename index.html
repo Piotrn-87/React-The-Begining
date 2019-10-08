@@ -369,22 +369,41 @@
         }
       }
 
-      function TimeboxCreator({ onCreate }) {
-        return (
-          <form onSubmit={onCreate} className="TimeboxCreator">
-            <label>
-              Co Robisz ?
-              <input type="text" />
-            </label>
-            <br />
-            <label>
-              Jak Dlugo ?
-              <input type="number" />
-            </label>
-            <br />
-            <button> Add Timebox </button>
-          </form>
-        );
+      class TimeboxCreator extends React.Component {
+        constructor(props) {
+          super(props);
+          this.titleInput = React.createRef();
+          this.totalTimeInMinutesInput = React.createRef();
+        }
+
+        handleSubmit = event => {
+          event.preventDefault();
+          this.props.onCreate({
+            id: uuid.v4(),
+            title: "",
+            totalTimeInMinutes: ""
+          });
+          this.titleInput.current.value = "";
+          this.totalTimeInMinutesInput.current.value = "";
+        };
+
+        render() {
+          return (
+            <form onSubmit={this.handleSubmit} className="TimeboxCreator">
+              <label>
+                Co Robisz ?
+                <input ref={this.titleInput} type="text" />
+              </label>
+              <br />
+              <label>
+                Jak Dlugo ?
+                <input ref={this.totalTimeInMinutesInput} type="number" />
+              </label>
+              <br />
+              <button> Add Timebox </button>
+            </form>
+          );
+        }
       }
 
       class TimeboxList extends React.Component {
@@ -421,12 +440,8 @@
           });
         };
 
-        handleCreate = () => {
-          this.addTimebox({
-            id: uuid.v4(),
-            title: "Nowy timebox",
-            totalTimeInMinutes: 6
-          });
+        handleCreate = createdTimebox => {
+          this.addTimebox(createdTimebox);
         };
 
         render() {
@@ -466,6 +481,7 @@
         return (
           <div className="App">
             <TimeboxList />
+            <EditableTimebox />
           </div>
         );
       }
