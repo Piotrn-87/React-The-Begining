@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import uuid from "uuid";
 
 function TimeboxEditor(props) {
@@ -382,8 +381,5 @@ function App() {
     </div>
   );
 }
-
-const root = document.getElementById("root");
-ReactDOM.render(<App />, root);
 
 export default App;
