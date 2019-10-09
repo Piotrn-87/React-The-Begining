@@ -1,6 +1,6 @@
 import React from "react";
-import EditableTimebox from "./EditableTimebox";
 import TimeboxCreator from "./TimeboxCreator";
+import Timebox from "./remaining-components/Timebox";
 
 class TimeboxList extends React.Component {
   state = {
@@ -81,18 +81,4 @@ class TimeboxList extends React.Component {
   }
 }
 
-function Timebox({ title, totalTimeInMinutes, onDelete, onEdit }) {
-  return (
-    <div className="Timebox">
-      <h3>
-        {" "}
-        {title} - {totalTimeInMinutes}
-        min.{" "}
-      </h3>{" "}
-      <button onClick={onDelete}> Delete </button>{" "}
-      <button onClick={onEdit}> Edit </button> <input />
-    </div>
-  );
-}
-
-export { EditableTimebox, TimeboxList };
+export default TimeboxList;
