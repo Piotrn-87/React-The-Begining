@@ -373,13 +373,4 @@ function Timebox({ title, totalTimeInMinutes, onDelete, onEdit }) {
   );
 }
 
-function App() {
-  return (
-    <div className="App">
-      <TimeboxList />
-      <EditableTimebox />
-    </div>
-  );
-}
-
-export default App;
+export { EditableTimebox, TimeboxList };
