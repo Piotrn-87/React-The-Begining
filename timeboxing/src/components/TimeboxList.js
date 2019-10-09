@@ -1,6 +1,6 @@
 import React from "react";
 import TimeboxCreator from "./TimeboxCreator";
-import Timebox from "./remaining-components/Timebox";
+import Timebox from "./Timebox";
 
 class TimeboxList extends React.Component {
   state = {

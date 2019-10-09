@@ -1,5 +1,5 @@
 import React from "react";
-import { EditableTimebox } from "./remaining-components";
+import EditableTimebox from "./EditableTimebox";
 
 import uuid from "uuid";
 
