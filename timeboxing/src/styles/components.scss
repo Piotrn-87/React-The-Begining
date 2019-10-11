@@ -16,13 +16,6 @@ body {
     font-size: 1rem;
 }
 
-.Timebox {
-    border: 1px solid grey;
-    border-radius: 5px;
-    padding: 0.5rem;
-    margin: 2rem 0.5rem;
-}
-
 .TimeboxEditor,
 .TimeBoxCreator {
     border: 1px solid grey;
@@ -70,37 +63,41 @@ body {
     padding: 2rem;
     border-radius: 5px;
     text-align: center;
+
+    &__text {
+        text-transform: uppercase;
+    }
+
+    &__button {
+        background: cadetblue;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-left: 1rem;
+        padding: 0.3rem 2rem;
+    }
 }
 
-.TimeBox__button {
-    background: cadetblue;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    padding: 0.3rem 2rem;
-    margin-left: 1rem;
-}
-
-.clock {
-    color: cadetblue;
-}
-
-.progressBar {
+.ProgressBar {
     border: 1px solid grey;
     border-radius: 5px;
     height: 2rem;
     margin: 3rem;
     padding: 0.5rem;
+
+    &__width {
+        background: linear-gradient(to right, limegreen, green);
+        height: 100%;
+    }
 }
 
-.progressBar__width {
-    background: linear-gradient(to right, #ccc, #444);
-    background: linear-gradient(to right, limegreen, green);
-    height: 100%;
+.Timebox {
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin: 2rem 0.5rem;
 }
 
-.timer {
-    color: coral;
-    padding: 0 0 0.5rem 2rem;
-    font-weight: bold;
+.clock {
+    color: cadetblue;
 }

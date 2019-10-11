@@ -79,7 +79,7 @@ class CurrentTimebox extends React.Component {
       (elapsedTimesInSeconds / totalTimeInSeconds) * 100;
     return (
       <div className={`CurrentTimeBox ${isEditable ? "inactive" : ""}`}>
-        <h1 className="TimeBoxClock"> {title} </h1>{" "}
+        <h1 className="CurrentTimeBox__text"> {title} </h1>{" "}
         <Clock
           minutes={minutesLeft}
           seconds={secondsLeft}
@@ -90,35 +90,35 @@ class CurrentTimebox extends React.Component {
           className={isPaused ? "inactive" : ""}
         />{" "}
         <button
-          className="TimeBox__button"
+          className="CurrentTimeBox__button"
           onClick={onEdit}
           disabled={isEditable}
         >
           Edit{" "}
         </button>{" "}
         <button
-          className="TimeBox__button"
+          className="CurrentTimeBox__button"
           onClick={this.handleStart}
           disabled={isRunning}
         >
           Start{" "}
         </button>{" "}
         <button
-          className="TimeBox__button"
+          className="CurrentTimeBox__button"
           onClick={this.handleStop}
           disabled={!isRunning}
         >
           Stop{" "}
         </button>{" "}
         <button
-          className="TimeBox__button"
+          className="CurrentTimeBox__button"
           onClick={this.togglePause}
           disabled={!isRunning}
         >
           {isPaused ? "Continue" : "Pause"}{" "}
         </button>{" "}
         <br /> <br />
-        Breaks {pausesCount}{" "}
+        Breaks: {pausesCount}{" "}
       </div>
     );
   }

@@ -2,9 +2,9 @@ import React from "react";
 
 function ProgressBar({ className = "", percent }) {
   return (
-    <div className={"progressBar " + className}>
+    <div className={"ProgressBar " + className}>
       <div
-        className="progressBar__width"
+        className="ProgressBar__width"
         style={{
           width: `${percent}%`
         }}
