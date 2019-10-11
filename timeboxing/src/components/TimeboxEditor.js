@@ -11,10 +11,11 @@ function TimeboxEditor(props) {
   } = props;
   return (
     <div className={`TimeboxEditor ${isEditable ? "" : "inactive"}`}>
-      <label>
+      <label className="TimeboxEditor__label">
         {" "}
         Co Robisz ?
         <input
+          className="TimeboxEditor__input"
           disabled={!isEditable}
           value={title}
           onChange={onTitleChange}
@@ -22,10 +23,11 @@ function TimeboxEditor(props) {
         />
       </label>{" "}
       <br />
-      <label>
+      <label className="TimeboxEditor__label">
         {" "}
         Jak Dlugo ?
         <input
+          className="TimeboxEditor__input"
           disabled={!isEditable}
           value={totalTimeInMinutes}
           onChange={onTotalTimeInMinutesChange}
@@ -33,9 +35,9 @@ function TimeboxEditor(props) {
         />
       </label>{" "}
       <br />
-      <div className="TimeboxEditor__div">
+      <div className="TimeboxEditor-wrapper">
         <button
-          className="TimeboxEditor__button"
+          className="TimeboxEditor-wrapper__button"
           onClick={onConfirm}
           disabled={!isEditable}
         >
