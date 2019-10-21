@@ -1,14 +1,19 @@
 import React from "react";
+import classNames from "classnames";
 
-function ProgressBar({ className = "", percent }) {
+function ProgressBar({ className = "", percent, big = false, color = null }) {
+  let progressClassName = classNames("ProgressBar", className, {
+    "progress--big": big,
+    "progress--color-red": color === "red"
+  });
   return (
-    <div className={"ProgressBar " + className}>
+    <div className={progressClassName}>
       <div
         className="ProgressBar__width"
         style={{
           width: `${percent}%`
         }}
-      ></div>{" "}
+      ></div>
     </div>
   );
 }
