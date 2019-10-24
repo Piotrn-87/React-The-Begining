@@ -1,6 +1,7 @@
 import React from "react";
 import TimeboxCreator from "./TimeboxCreator";
 import Timebox from "./Timebox";
+import Error from "./Error";
 
 class TimeboxList extends React.Component {
   state = {
@@ -24,6 +25,7 @@ class TimeboxList extends React.Component {
   };
 
   addTimebox = timebox => {
+    throw new Error("Nie udalo sie utworzyc timeboxa");
     this.setState(prevState => {
       const timeboxes = [...prevState.timeboxes, timebox];
       return {
@@ -55,7 +57,11 @@ class TimeboxList extends React.Component {
   };
 
   handleCreate = createdTimebox => {
-    this.addTimebox(createdTimebox);
+    try {
+      this.addTimebox(createdTimebox);
+    } catch (error) {
+      console.log("Bląd przy tworzeniu Timeboxa ", error);
+    }
   };
 
   render() {
